@@ -3,8 +3,10 @@ package co.cdmunoz.kotlineafitmoviedb
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import co.cdmunoz.kotlineafitmoviedb.api.MovieDbApiService
-import co.cdmunoz.kotlineafitmoviedb.api.MoviesResponse
+import co.cdmunoz.kotlineafitmoviedb.data.source.remote.MovieDbApiService
+import co.cdmunoz.kotlineafitmoviedb.data.MoviesResponse
+import co.cdmunoz.kotlineafitmoviedb.data.source.MovieDbRepository
+import co.cdmunoz.kotlineafitmoviedb.data.source.remote.MovieDbApiService.Factory
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
@@ -17,12 +19,13 @@ class ListActivity : AppCompatActivity() {
   }
 
   lateinit var disposableObserver: DisposableObserver<MoviesResponse>
+  lateinit var movieDbRepository: MovieDbRepository
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_list)
 
-    val apiService = MovieDbApiService.create()
+    movieDbRepository = MovieDbRepository(MovieDbApiService.create())
 
     disposableObserver = object : DisposableObserver<MoviesResponse>() {
       override fun onComplete() {
@@ -39,7 +42,7 @@ class ListActivity : AppCompatActivity() {
       }
     }
 
-    apiService.getMovies("2018", "df1b9abfde892d0d5407d6b602b349f2")
+    movieDbRepository.getMovies("2018", "df1b9abfde892d0d5407d6b602b349f2")
         .observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
         .subscribe(disposableObserver)

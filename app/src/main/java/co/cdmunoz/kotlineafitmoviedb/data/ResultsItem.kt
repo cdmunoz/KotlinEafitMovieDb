@@ -1,4 +1,4 @@
-package co.cdmunoz.kotlineafitmoviedb.api
+package co.cdmunoz.kotlineafitmoviedb.data
 
 import com.squareup.moshi.Json
 

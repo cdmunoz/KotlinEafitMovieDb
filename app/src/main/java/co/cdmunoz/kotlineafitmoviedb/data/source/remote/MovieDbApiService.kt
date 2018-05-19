@@ -1,6 +1,7 @@
-package co.cdmunoz.kotlineafitmoviedb.api
+package co.cdmunoz.kotlineafitmoviedb.data.source.remote
 
 import co.cdmunoz.kotlineafitmoviedb.BuildConfig
+import co.cdmunoz.kotlineafitmoviedb.data.MoviesResponse
 import io.reactivex.Observable
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
