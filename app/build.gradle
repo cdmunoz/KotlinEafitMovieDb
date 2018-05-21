@@ -12,6 +12,7 @@ android {
     versionName "1.0"
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
+    buildConfigField "String", "IMG_BASE_URL", "\"https://image.tmdb.org/t/p/w154/\""
   }
   buildTypes {
     release {
@@ -27,6 +28,10 @@ dependencies {
   implementation 'com.android.support:appcompat-v7:27.1.1'
   implementation 'com.android.support.constraint:constraint-layout:1.1.0'
   implementation 'com.android.support:cardview-v7:27.1.1'
+  implementation "com.android.support:recyclerview-v7:27.1.1"
+
+  //Picasso
+  implementation 'com.squareup.picasso:picasso:2.5.2'
 
   //Retrofit
   implementation "com.squareup.retrofit2:retrofit:2.3.0"

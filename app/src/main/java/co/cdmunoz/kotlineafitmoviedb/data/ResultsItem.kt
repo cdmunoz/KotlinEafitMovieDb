@@ -32,7 +32,7 @@ data class ResultsItem(
     val releaseDate: String? = null,
 
     @Json(name = "vote_average")
-    val voteAverage: Int? = null,
+    val voteAverage: Double? = null,
 
     @Json(name = "popularity")
     val popularity: Double? = null,

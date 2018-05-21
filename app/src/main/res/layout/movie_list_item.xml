@@ -2,13 +2,14 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="8dp"
+    android:background="@android:color/darker_gray"
     >
 
   <android.support.v7.widget.CardView
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
+      android:layout_height="match_parent"
       app:cardCornerRadius="@dimen/default_card_view_corner_radius"
       app:cardElevation="@dimen/default_card_view_elevation"
       >
@@ -21,7 +22,6 @@
           android:id="@+id/movie_image_poster"
           android:layout_width="match_parent"
           android:layout_height="@dimen/movie_image_view_height"
-          android:layout_marginEnd="8dp"
           android:adjustViewBounds="true"
           android:scaleType="fitXY"
           app:layout_constraintEnd_toEndOf="parent"
@@ -30,29 +30,15 @@
           app:srcCompat="@mipmap/ic_launcher_round"
           />
       <TextView
-          android:id="@+id/movie_title_lbl"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="8dp"
-          android:layout_marginStart="8dp"
-          android:layout_marginTop="8dp"
-          android:text="@string/title_lbl"
-          android:textSize="@dimen/default_text_size"
-          android:textStyle="bold"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/movie_image_poster"
-          app:layout_constraintVertical_bias="0.0"
-          />
-      <TextView
           android:id="@+id/movie_title"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginStart="12dp"
+          android:layout_marginStart="8dp"
           android:layout_marginTop="8dp"
           android:text="@string/movie_title_text"
           android:textSize="@dimen/default_text_size"
-          app:layout_constraintStart_toEndOf="@+id/movie_title_lbl"
+          android:textStyle="italic|bold"
+          app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/movie_image_poster"
           />
       <TextView
@@ -66,7 +52,7 @@
           android:textStyle="bold"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/movie_title_lbl"
+          app:layout_constraintTop_toBottomOf="@+id/movie_title"
           />
       <TextView
           android:id="@+id/movie_release_date"
