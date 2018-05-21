@@ -8,17 +8,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import co.cdmunoz.kotlineafitmoviedb.BuildConfig
 import co.cdmunoz.kotlineafitmoviedb.R
-import co.cdmunoz.kotlineafitmoviedb.data.ResultsItem
+import co.cdmunoz.kotlineafitmoviedb.data.MovieItem
 import com.squareup.picasso.Picasso
 
 
 class MoviesDbAdapter(
-    movies: List<ResultsItem>) : RecyclerView.Adapter<MoviesDbAdapter.MoviesDbViewHolder>() {
+    movies: List<MovieItem>) : RecyclerView.Adapter<MoviesDbAdapter.MoviesDbViewHolder>() {
 
-  private var moviesDbList = ArrayList<ResultsItem>()
+  private var moviesDbList = ArrayList<MovieItem>()
 
   init {
-    this.moviesDbList = movies as ArrayList<ResultsItem>
+    this.moviesDbList = movies as ArrayList<MovieItem>
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesDbViewHolder {
@@ -41,14 +41,14 @@ class MoviesDbAdapter(
     var movieReleaseDate = itemView.findViewById<TextView>(R.id.movie_release_date)
     var movieVoteAvg = itemView.findViewById<TextView>(R.id.movie_vote_avg)
 
-    fun movieDbItem(resultsItem: ResultsItem) {
+    fun movieDbItem(movieItem: MovieItem) {
       Picasso.with(itemView.context)
-          .load(BuildConfig.IMG_BASE_URL + resultsItem.posterPath)
+          .load(BuildConfig.IMG_BASE_URL + movieItem.posterPath)
           .into(movieImagePoster)
 
-      movieTitle.text = resultsItem.title
-      movieReleaseDate.text = resultsItem.releaseDate
-      movieVoteAvg.text = resultsItem.voteAverage.toString()
+      movieTitle.text = movieItem.title
+      movieReleaseDate.text = movieItem.releaseDate
+      movieVoteAvg.text = movieItem.voteAverage.toString()
     }
   }
 }

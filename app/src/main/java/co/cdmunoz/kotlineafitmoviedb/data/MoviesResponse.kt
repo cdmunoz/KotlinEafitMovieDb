@@ -11,7 +11,7 @@ data class MoviesResponse(
 	val totalPages: Int? = null,
 
 	@Json(name="results")
-	val results: List<ResultsItem?>? = null,
+	val results: List<MovieItem?>? = null,
 
 	@Json(name="total_results")
 	val totalResults: Int? = null

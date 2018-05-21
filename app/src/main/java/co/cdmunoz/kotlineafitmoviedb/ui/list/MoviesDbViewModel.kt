@@ -5,7 +5,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.util.Log
 import co.cdmunoz.kotlineafitmoviedb.data.MoviesResponse
-import co.cdmunoz.kotlineafitmoviedb.data.ResultsItem
+import co.cdmunoz.kotlineafitmoviedb.data.MovieItem
 import co.cdmunoz.kotlineafitmoviedb.data.source.MovieDbRepository
 import co.cdmunoz.kotlineafitmoviedb.data.source.remote.MovieDbApiService
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -16,8 +16,8 @@ import io.reactivex.schedulers.Schedulers
 class MoviesDbViewModel: ViewModel() {
 
   private val movieDbRepository: MovieDbRepository = MovieDbRepository(MovieDbApiService.create())
-  var moviesResult: MutableLiveData<List<ResultsItem>> = MutableLiveData()
-  fun moviesResult(): LiveData<List<ResultsItem>> = moviesResult
+  var moviesResult: MutableLiveData<List<MovieItem>> = MutableLiveData()
+  fun moviesResult(): LiveData<List<MovieItem>> = moviesResult
 
   lateinit var disposableObserver: DisposableObserver<MoviesResponse>
 
@@ -29,7 +29,7 @@ class MoviesDbViewModel: ViewModel() {
       override fun onNext(moviesResponse: MoviesResponse) {
         val numberOfItems = moviesResponse.results?.size.toString()
         Log.i(ListActivity.TAG, "+++++++++++++++++ Size of results: $numberOfItems")
-        moviesResult.postValue(moviesResponse.results as List<ResultsItem>?)
+        moviesResult.postValue(moviesResponse.results as List<MovieItem>?)
       }
 
       override fun onError(error: Throwable) {
