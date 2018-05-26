@@ -6,4 +6,5 @@
   <string name="release_date_text">2018-02-07</string>
   <string name="vote_avg_lbl">Vote Avg</string>
   <string name="default_vote_avg_value">0.0</string>
+  <string name="detail_overview">Detail overview</string>
 </resources>
