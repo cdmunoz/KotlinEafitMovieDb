@@ -5,6 +5,7 @@ import android.arch.persistence.room.Entity
 import android.arch.persistence.room.Ignore
 import android.arch.persistence.room.PrimaryKey
 import com.squareup.moshi.Json
+import java.io.Serializable
 
 @Entity(tableName = "movies")
 data class MovieItem(
@@ -60,4 +61,4 @@ data class MovieItem(
     @Json(name = "vote_count")
     @ColumnInfo(name = "vote_count")
     val voteCount: Int? = null
-)
+): Serializable

@@ -1,5 +1,7 @@
 package co.cdmunoz.kotlineafitmoviedb.ui.list
 
+import android.content.Intent
+import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +11,7 @@ import android.widget.TextView
 import co.cdmunoz.kotlineafitmoviedb.BuildConfig
 import co.cdmunoz.kotlineafitmoviedb.R
 import co.cdmunoz.kotlineafitmoviedb.data.MovieItem
+import co.cdmunoz.kotlineafitmoviedb.ui.detail.DetailActivity
 import com.squareup.picasso.Picasso
 
 
@@ -36,6 +39,7 @@ class MoviesDbAdapter(
 
 
   class MoviesDbViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    var movieCard = itemView.findViewById<CardView>(R.id.movie_card)
     var movieImagePoster = itemView.findViewById<ImageView>(R.id.movie_image_poster)
     var movieTitle = itemView.findViewById<TextView>(R.id.movie_title)
     var movieReleaseDate = itemView.findViewById<TextView>(R.id.movie_release_date)
@@ -49,6 +53,12 @@ class MoviesDbAdapter(
       movieTitle.text = movieItem.title
       movieReleaseDate.text = movieItem.releaseDate
       movieVoteAvg.text = movieItem.voteAverage.toString()
+      movieCard.setOnClickListener {
+        val context = itemView.context
+        val detailIntent = Intent(context, DetailActivity::class.java)
+        detailIntent.putExtra("THE_MOVIE", movieItem)
+        context.startActivity(detailIntent)
+      }
     }
   }
 }
