@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import co.cdmunoz.kotlineafitmoviedb.R.layout
 import co.cdmunoz.kotlineafitmoviedb.data.MovieItem
 import kotlinx.android.synthetic.main.activity_list.movies_list
+import kotlinx.android.synthetic.main.activity_list.progressBar
 
 class ListActivity : AppCompatActivity() {
 
@@ -44,6 +46,12 @@ class ListActivity : AppCompatActivity() {
       if (it != null) {
         moviesDbAdapter = MoviesDbAdapter(it)
         movies_list.adapter = moviesDbAdapter
+      }
+    })
+
+    moviesDbViewModel.moviesLoader().observe(this, Observer<Boolean> {
+      if (it == false){
+        progressBar.visibility = View.GONE
       }
     })
   }

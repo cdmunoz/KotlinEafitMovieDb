@@ -19,8 +19,12 @@ class MoviesDbViewModel : ViewModel() {
   private val database = MoviesDatabase.getMoviesDbDatabase(MoviesDbApplication.instance)
   private val movieDbRepository: MovieDbRepository = MovieDbRepository(MovieDbApiService.create(),
       database.moviesDbDao())
-  var moviesResult: MutableLiveData<List<MovieItem>> = MutableLiveData()
+
+  private var moviesResult: MutableLiveData<List<MovieItem>> = MutableLiveData()
   fun moviesResult(): LiveData<List<MovieItem>> = moviesResult
+
+  private var moviesLoader: MutableLiveData<Boolean> = MutableLiveData()
+  fun moviesLoader(): LiveData<Boolean> = moviesLoader
 
   lateinit var disposableObserver: DisposableObserver<List<MovieItem>>
 
@@ -33,10 +37,12 @@ class MoviesDbViewModel : ViewModel() {
         val numberOfItems = movies.size.toString()
         Log.i(ListActivity.TAG, "+++++++++++++++++ Size of results: $numberOfItems")
         moviesResult.postValue(movies)
+        moviesLoader.postValue(false)
       }
 
       override fun onError(error: Throwable) {
         Log.e(ListActivity.TAG, "Error getting results: ${error.message}")
+        moviesLoader.postValue(false)
       }
     }
 
