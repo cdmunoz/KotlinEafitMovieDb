@@ -7,19 +7,26 @@ import co.cdmunoz.kotlineafitmoviedb.data.source.local.MoviesDbDao
 import co.cdmunoz.kotlineafitmoviedb.data.source.remote.MovieDbApiService
 import co.cdmunoz.kotlineafitmoviedb.utils.Utilities
 import io.reactivex.Observable
+import java.util.Calendar
 
 
 class MovieDbRepository constructor(val apiService: MovieDbApiService,
     val moviesDbDao: MoviesDbDao) {
 
+  private val context = MoviesDbApplication.instance
+
   fun getMovies(year: String, apiKey: String): Observable<List<MovieItem>> {
-    val isConnected = Utilities.isConnectionAvailable(MoviesDbApplication.instance)
-    lateinit var observableFromApi: Observable<List<MovieItem>>
-    if (isConnected) {
+    val isConnected = Utilities.isConnectionAvailable(context)
+    var observableFromApi: Observable<List<MovieItem>>? = null
+    var hasApiData = Utilities.shouldGetDataFromApi(context)
+    if (isConnected && hasApiData) {
       observableFromApi = getMoviesFromApi(year, apiKey)
+      Utilities.putLongSharedPreferences(context, "pref_time_net_query",
+          Calendar.getInstance().timeInMillis)
+      hasApiData = true
     }
     val observableFromDb = getMoviesFromDb()
-    return if (isConnected) Observable.concatArrayEager(observableFromApi,
+    return if (hasApiData) Observable.concatArrayEager(observableFromApi,
         observableFromDb) else observableFromDb
   }
 
