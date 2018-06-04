@@ -10,10 +10,13 @@ import io.reactivex.Single
 @Dao
 interface MoviesDbDao {
 
-  @Query("SELECT * FROM movies ORDER BY vote_average DESC")
-  fun queryMovies(): Single<List<MovieItem>>
+    @Query("SELECT * FROM movies ORDER BY vote_average DESC")
+    fun queryMovies(): Single<List<MovieItem>>
 
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
-  fun insertMovie(movieItem: MovieItem)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertMovie(movieItem: MovieItem)
+
+    @Query("DELETE FROM movies")
+    fun deleteAllMovies()
 
 }
